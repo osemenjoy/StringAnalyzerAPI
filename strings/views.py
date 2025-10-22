@@ -38,6 +38,18 @@ class StringListCreateAPIView(generics.ListCreateAPIView):
 
         return data
 
+    def list(self, request, *args, **kwargs):
+        try:
+            qs = self.get_queryset()
+            serializer = self.get_serializer(qs, many=True)
+            return Response({
+                "data": serializer.data,
+                "count": len(serializer.data),
+                "filters_applied": dict(request.GET.items())
+            }, status=200)
+        except (ValueError, TypeError) as e:
+            return Response({"detail": str(e)}, status=400)
+
     def create(self, request, *args, **kwargs):
         value = request.data.get("value")
         if value is None:
