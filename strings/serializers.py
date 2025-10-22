@@ -18,3 +18,4 @@ class AnalyzedStringSerializer(serializers.ModelSerializer):
             "sha256_hash": obj.sha256_hash,
             "character_frequency_map": obj.character_frequency_map,
         }
+    

@@ -4,6 +4,7 @@ from .models import AnalyzedString
 @admin.register(AnalyzedString)
 class AnalyzedStringAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'value',
         'length',
         'is_palindrome',
